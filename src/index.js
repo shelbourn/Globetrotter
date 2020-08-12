@@ -1,5 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import { ThemeProvider } from '@material-ui/core/styles'
+import theme from './theme'
 import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
@@ -7,15 +10,22 @@ import * as serviceWorker from './serviceWorker'
 import { BrowserRouter } from 'react-router-dom'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
+import destinations from './store/reducers/index'
 
 // Creating Redux Store
-const reduxStore = createStore(destinationReducer)
+const reduxStore = createStore(
+	destinations,
+	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
 
 ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={reduxStore}>
 			<BrowserRouter>
-				<App />
+				<ThemeProvider theme={theme}>
+					<CssBaseline />
+					<App />
+				</ThemeProvider>
 			</BrowserRouter>
 		</Provider>
 	</React.StrictMode>,
