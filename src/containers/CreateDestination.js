@@ -48,7 +48,7 @@ const CreateDestination = () => {
 
 	return (
 		<>
-			<div style={{ margin: '10px', fontWeight: 'bold' }}>
+			<div style={{ margin: '15px 10px 15px 10px', fontWeight: 'bold' }}>
 				<Typography variant="h4" color="primary">
 					Create Destination
 				</Typography>
