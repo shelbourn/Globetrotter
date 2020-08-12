@@ -9,7 +9,7 @@ import * as serviceWorker from './serviceWorker'
 
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import destinations from './store/reducers/index'
+import destinations from './store/reducers/destinations'
 
 // Creating Redux Store
 const reduxStore = createStore(

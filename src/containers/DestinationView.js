@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Typography from '@material-ui/core/Typography'
 import { withStyles, makeStyles } from '@material-ui/core/styles'
 import Table from '@material-ui/core/Table'
@@ -8,7 +8,8 @@ import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
-import { useSelector } from 'react-redux'
+import useLocalStorage from '../utilities/useLocalStorage'
+import SearchBar from '../components/UI/searchBar'
 
 const useStyles = makeStyles({
 	table: {
@@ -26,20 +27,21 @@ const StyledTableCell = withStyles((theme) => ({
 	},
 }))(TableCell)
 
-function createData(name, calories, fat, carbs, protein) {
-	return { name, calories, fat, carbs, protein }
-}
-
-const rows = [
-	createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-	createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-	createData('Eclair', 262, 16.0, 24, 6.0),
-	createData('Cupcake', 305, 3.7, 67, 4.3),
-	createData('Gingerbread', 356, 16.0, 49, 3.9),
-]
-
 const DestinationView = () => {
-	const destinationsState = useSelector((state) => state.destinations)
+	const [destFiltered, setDestFiltered] = useState([])
+
+	const [destinations, setDestinations] = useLocalStorage(
+		'storedDestinations',
+		[
+			{
+				destName: '',
+				destPrice: '',
+				destDescription: '',
+				destDifficulty: '',
+				id: '',
+			},
+		]
+	)
 
 	const tableRowHeaders = [
 		'Destination Name',
@@ -48,28 +50,24 @@ const DestinationView = () => {
 		'Destination Difficulty',
 		'ID',
 	]
-
-	const tableRows = Object.keys(destinationsState)
-
 	const tableHeaderMap = tableRowHeaders.map((header) => {
 		return <StyledTableCell key={header.id}>{header}</StyledTableCell>
 	})
-
-	const tableRowMap = tableRows.map((row, i) => {
+	const tableRowMap = destinations.map((row, i) => {
+		console.log(row)
 		return (
-			<TableRow key={destinationsState.id}>
+			<TableRow key={row.id}>
 				<TableCell component="th" scope="row">
-					{destinationsState.destName}
+					{row.destName}
 				</TableCell>
-				<TableCell align="right">{destinationsState.destPrice}</TableCell>
-				<TableCell align="right">{destinationsState.destDescription}</TableCell>
-				<TableCell align="right">{destinationsState.destDifficulty}</TableCell>
+				<TableCell align="center">{row.destPrice}</TableCell>
+				<TableCell align="center">{row.destDescription}</TableCell>
+				<TableCell align="center">{row.destDifficulty}</TableCell>
+				<TableCell align="center">{row.id}</TableCell>
 			</TableRow>
 		)
 	})
-
 	const classes = useStyles()
-
 	return (
 		<>
 			<div style={{ margin: '15px 10px 15px 10px', fontWeight: 'bold' }}>
@@ -77,6 +75,11 @@ const DestinationView = () => {
 					Destination List
 				</Typography>
 			</div>
+			<SearchBar
+				destintations={destinations}
+				setDestFiltered={setDestFiltered}
+			/>
+
 			<div style={{ margin: '21px 10px 15px 10px' }}>
 				<TableContainer component={Paper}>
 					<Table className={classes.table} aria-label="destinations table">

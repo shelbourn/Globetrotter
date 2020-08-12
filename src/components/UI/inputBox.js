@@ -14,6 +14,7 @@ const inputBox = (props) => {
 				multiline={props.multiline}
 				onChange={props.onChange}
 				value={props.value}
+				type={props.number ? 'number' : 'text'}
 				InputProps={{
 					startAdornment: props.adornment,
 				}}

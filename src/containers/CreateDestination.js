@@ -1,44 +1,71 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addDestination } from '../store/actions/index'
+import { updateDestinations } from '../store/actions/actions'
 import InputBox from '../components/UI/inputBox'
 import Button from '../components/UI/button'
 import DifficultySelect from '../components/UI/difficultySelect'
 import Typography from '@material-ui/core/Typography'
 import InputAdornment from '@material-ui/core/InputAdornment'
+import useLocalStorage from '../utilities/useLocalStorage'
 
 const CreateDestination = () => {
-	const [destinations, setDestinations] = useState([
-		{
-			destName: '',
-			destPrice: '',
-			destDescription: '',
-			destDifficulty: '',
-			id: '',
-		},
-	])
+	const initialValues = {
+		destName: '',
+		destPrice: '',
+		destDescription: '',
+		destDifficulty: '',
+		id: '',
+	}
+	const [values, setValues] = useLocalStorage('storedValues', initialValues)
 
-	const destinationsState = useSelector((state) => state.destinations)
+	const [destinations, setDestinations] = useLocalStorage(
+		'storedDestinations',
+		[]
+	)
 
 	const dispatch = useDispatch()
 
 	const onChangeHandler = (prop) => (event) => {
-		setDestinations({ ...destinations, [prop]: event.target.value })
+		setValues({ ...values, [prop]: event.target.value })
 	}
 
-	const onClickHandler = () => dispatch(addDestination(destinations))
+	const addDestination = (destination) => {
+		try {
+			if (
+				values.destName === '' ||
+				values.destPrice === '' ||
+				values.destDescription === '' ||
+				values.destDescription === ''
+			)
+				throw new Error('Whoopsie! Empty destination fields present. =(')
+			else {
+				const newDestinations = [
+					...destinations,
+					{ ...destination, id: destination.destName },
+				]
+				setDestinations(newDestinations)
+			}
+		} catch (err) {
+			console.log(`${err.name}: ${err.message}`)
+		} finally {
+		}
+	}
+
+	const onClickHandler = (event) => {
+		event.preventDefault()
+		addDestination(values)
+		dispatch(updateDestinations(values))
+		destinations.destPrice = `${destinations.destPrice}`
+		console.log(destinations)
+	}
 
 	const clearFormHandler = () => {
-		setDestinations({
+		setValues({
 			destName: '',
 			destPrice: '',
 			destDescription: '',
 			destDifficulty: '',
 			id: '',
-		})
-		dispatch({
-			type: 'CLEAR_FORM',
-			payload: { destinations },
 		})
 	}
 
@@ -54,23 +81,22 @@ const CreateDestination = () => {
 					label="Destination Name"
 					placeholder="Enter a Destination"
 					onChange={onChangeHandler('destName')}
-					value={destinations.destName ? destinations.destName : ''}
+					value={values.destName}
 				/>
 				<InputBox
 					label="Price"
 					placeholder="Price"
 					onChange={onChangeHandler('destPrice')}
-					value={destinations.destPrice ? destinations.destPrice : ''}
+					value={values.destPrice ? values.destPrice : ''}
 					adornment={<InputAdornment position="start">$</InputAdornment>}
+					number={true}
 				/>
 				<InputBox
 					label="Description"
 					multiline
 					placeholder="Enter a Description"
 					onChange={onChangeHandler('destDescription')}
-					value={
-						destinations.destDescription ? destinations.destDescription : ''
-					}
+					value={values.destDescription ? values.destDescription : ''}
 				/>
 				<DifficultySelect
 					id="destination-difficulty-input"
@@ -78,7 +104,7 @@ const CreateDestination = () => {
 					inputName="Difficulty"
 					labelId="difficulty-select-label"
 					onChange={onChangeHandler('destDifficulty')}
-					value={destinations.destDifficulty ? destinations.destDifficulty : ''}
+					value={values.destDifficulty ? values.destDifficulty : ''}
 				/>
 				<span style={{ width: '60%' }}>
 					<Button color="primary" onClick={onClickHandler}>
