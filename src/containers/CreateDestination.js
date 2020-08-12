@@ -1,20 +1,22 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { addDestination } from '../store/actions/index'
 import InputBox from '../components/UI/inputBox'
 import Button from '../components/UI/button'
 import DifficultySelect from '../components/UI/difficultySelect'
 import Typography from '@material-ui/core/Typography'
 import InputAdornment from '@material-ui/core/InputAdornment'
-import useId from 'react-id-generator'
 
 const CreateDestination = () => {
-	const [destinations, setDestinations] = useState({
-		destName: '',
-		destPrice: '',
-		destDescription: '',
-		destDifficulty: '',
-		id: '',
-	})
+	const [destinations, setDestinations] = useState([
+		{
+			destName: '',
+			destPrice: '',
+			destDescription: '',
+			destDifficulty: '',
+			id: '',
+		},
+	])
 
 	const destinationsState = useSelector((state) => state.destinations)
 
@@ -24,13 +26,7 @@ const CreateDestination = () => {
 		setDestinations({ ...destinations, [prop]: event.target.value })
 	}
 
-	const newId = useId()
-
-	const onClickHandler = () =>
-		dispatch({
-			type: 'ADD_DESTINATION',
-			payload: { ...destinations, id: newId },
-		})
+	const onClickHandler = () => dispatch(addDestination(destinations))
 
 	const clearFormHandler = () => {
 		setDestinations({
@@ -58,21 +54,13 @@ const CreateDestination = () => {
 					label="Destination Name"
 					placeholder="Enter a Destination"
 					onChange={onChangeHandler('destName')}
-					value={
-						destinationsState.destName
-							? destinationsState.destName
-							: destinations.destName
-					}
+					value={destinations.destName ? destinations.destName : ''}
 				/>
 				<InputBox
 					label="Price"
 					placeholder="Price"
 					onChange={onChangeHandler('destPrice')}
-					value={
-						destinationsState.destPrice
-							? destinationsState.destPrice
-							: destinations.destPrice
-					}
+					value={destinations.destPrice ? destinations.destPrice : ''}
 					adornment={<InputAdornment position="start">$</InputAdornment>}
 				/>
 				<InputBox
@@ -81,9 +69,7 @@ const CreateDestination = () => {
 					placeholder="Enter a Description"
 					onChange={onChangeHandler('destDescription')}
 					value={
-						destinationsState.destDescription
-							? destinationsState.destDescription
-							: destinations.destDescription
+						destinations.destDescription ? destinations.destDescription : ''
 					}
 				/>
 				<DifficultySelect
@@ -92,11 +78,7 @@ const CreateDestination = () => {
 					inputName="Difficulty"
 					labelId="difficulty-select-label"
 					onChange={onChangeHandler('destDifficulty')}
-					value={
-						destinationsState.destDifficulty
-							? destinationsState.destDifficulty
-							: destinations.destDifficulty
-					}
+					value={destinations.destDifficulty ? destinations.destDifficulty : ''}
 				/>
 				<span style={{ width: '60%' }}>
 					<Button color="primary" onClick={onClickHandler}>

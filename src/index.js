@@ -7,7 +7,6 @@ import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 
-import { BrowserRouter } from 'react-router-dom'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import destinations from './store/reducers/index'
@@ -21,12 +20,10 @@ const reduxStore = createStore(
 ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={reduxStore}>
-			<BrowserRouter>
-				<ThemeProvider theme={theme}>
-					<CssBaseline />
-					<App />
-				</ThemeProvider>
-			</BrowserRouter>
+			<ThemeProvider theme={theme}>
+				<CssBaseline />
+				<App />
+			</ThemeProvider>
 		</Provider>
 	</React.StrictMode>,
 	document.getElementById('root')

@@ -49,8 +49,23 @@ const DestinationView = () => {
 		'ID',
 	]
 
-	const tableRowMap = tableRowHeaders.map((name) => {
-		return <StyledTableCell key={name.id}>{name}</StyledTableCell>
+	const tableRows = Object.keys(destinationsState)
+
+	const tableHeaderMap = tableRowHeaders.map((header) => {
+		return <StyledTableCell key={header.id}>{header}</StyledTableCell>
+	})
+
+	const tableRowMap = tableRows.map((row, i) => {
+		return (
+			<TableRow key={destinationsState.id}>
+				<TableCell component="th" scope="row">
+					{destinationsState.destName}
+				</TableCell>
+				<TableCell align="right">{destinationsState.destPrice}</TableCell>
+				<TableCell align="right">{destinationsState.destDescription}</TableCell>
+				<TableCell align="right">{destinationsState.destDifficulty}</TableCell>
+			</TableRow>
+		)
 	})
 
 	const classes = useStyles()
@@ -66,21 +81,9 @@ const DestinationView = () => {
 				<TableContainer component={Paper}>
 					<Table className={classes.table} aria-label="destinations table">
 						<TableHead>
-							<TableRow>{tableRowMap}</TableRow>
+							<TableRow>{tableHeaderMap}</TableRow>
 						</TableHead>
-						<TableBody>
-							{rows.map((row) => (
-								<TableRow key={row.name}>
-									<TableCell component="th" scope="row">
-										{row.name}
-									</TableCell>
-									<TableCell align="right">{row.calories}</TableCell>
-									<TableCell align="right">{row.fat}</TableCell>
-									<TableCell align="right">{row.carbs}</TableCell>
-									<TableCell align="right">{row.protein}</TableCell>
-								</TableRow>
-							))}
-						</TableBody>
+						<TableBody>{tableRowMap}</TableBody>
 					</Table>
 				</TableContainer>
 			</div>

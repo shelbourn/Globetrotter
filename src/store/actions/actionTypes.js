@@ -1,0 +1,1 @@
+export const ADD_DESTINATION = 'ADD_DESTINATION'

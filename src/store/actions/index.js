@@ -1,31 +1,10 @@
-export const addDestination = ({
-	destName,
-	destPrice,
-	destDescription,
-	destDifficulty,
-}) => ({
-	type: 'ADD_DESTINATION',
-	payload: {
-		id: destName,
-		destName,
-		destPrice,
-		destDescription,
-		destDifficulty,
-	},
-})
+import { ADD_DESTINATION } from './actionTypes'
+import nextId from 'react-id-generator'
 
-export const clearForm = ({
-	destName,
-	destPrice,
-	destDescription,
-	destDifficulty,
-}) => ({
-	type: 'CLEAR_FORM',
+export const addDestination = (destinations) => ({
+	type: ADD_DESTINATION,
 	payload: {
-		id: '',
-		destName: '',
-		destPrice: '',
-		destDescription: '',
-		destDifficulty: '',
+		...destinations,
+		id: nextId(),
 	},
 })

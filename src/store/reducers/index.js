@@ -1,20 +1,12 @@
-const initialState = {
-	destinations: {
-		destName: '',
-		destPrice: '',
-		destDescription: '',
-		destDifficulty: '',
-		id: '',
-	},
-}
+const initialState = []
 
 const destinations = (state = initialState, action) => {
 	switch (action.type) {
 		case 'ADD_DESTINATION':
-			return { destinations: action.payload }
+			return { ...destinations, destinations: action.payload }
 
 		case 'CLEAR_FORM':
-			return { destinations: action.payload }
+			return { ...destinations, destinations: action.payload }
 
 		default:
 			return state
