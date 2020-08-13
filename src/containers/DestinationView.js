@@ -41,14 +41,6 @@ const DestinationView = () => {
 		[initialState]
 	)
 
-	const filterFunction = (array) => {
-		setDestFiltered(array)
-	}
-
-	const onChangeHandler = (event) => {
-		setSearchString(event.target.value)
-	}
-
 	const search = (str) => {
 		console.log('goddammit:', str)
 		console.log(destinations)

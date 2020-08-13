@@ -1,21 +1,28 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 
-const DifficultySelect = (props) => {
+const DifficultySelect = ({
+	style,
+	labelId,
+	inputName,
+	id,
+	value,
+	onChange,
+	label,
+}) => {
 	return (
 		<div>
-			<FormControl variant="outlined" style={props.style} required>
-				<InputLabel id={props.labelId}>{props.inputName}</InputLabel>
+			<FormControl variant="outlined" style={style} required>
+				<InputLabel id={labelId}>{inputName}</InputLabel>
 				<Select
-					labelId={props.labelId}
-					id={props.id}
-					value={props.value}
-					onChange={props.onChange}
-					label={props.label}
+					labelId={labelId}
+					id={id}
+					value={value}
+					onChange={onChange}
+					label={label}
 				>
 					<MenuItem value={'Easy'}>Easy</MenuItem>
 					<MenuItem value={'Intermediate'}>Intermediate</MenuItem>

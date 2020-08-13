@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { updateDestinations } from '../store/actions/actions'
+import React, { useRef } from 'react'
 import { ValidatorForm } from 'react-material-ui-form-validator'
 import FormInput from '../components/UI/formInput'
 import Button from '../components/UI/button'
@@ -25,8 +23,6 @@ const CreateDestination = () => {
 	)
 
 	const formRef = useRef('form')
-
-	const dispatch = useDispatch()
 
 	const onChangeHandler = (prop) => (event) => {
 		setValues({ ...values, [prop]: event.target.value })
@@ -57,8 +53,6 @@ const CreateDestination = () => {
 	const onClickHandler = (event) => {
 		event.preventDefault()
 		addDestination(values)
-		dispatch(updateDestinations(values))
-		// destinations.destPrice = `${destinations.destPrice}`
 		console.log(destinations)
 	}
 
