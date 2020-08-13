@@ -14,8 +14,14 @@ const mainRouter = () => {
 			<Router>
 				<MenuBar />
 				<Switch>
-					<Route path="/create" component={CreateDestination} />
-					<Route path="/destinations" component={DestinationView} />
+					<Route
+						path={process.env.PUBLIC_URL + '/create'}
+						component={CreateDestination}
+					/>
+					<Route
+						path={process.env.PUBLIC_URL + '/destinations'}
+						component={DestinationView}
+					/>
 					<Route exact path="/">
 						<Redirect to="/create" />
 					</Route>
