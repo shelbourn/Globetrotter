@@ -79,7 +79,11 @@ const CreateDestination = () => {
 					Create Destination
 				</Typography>
 			</div>
-			<ValidatorForm ref={formRef} onSubmit={onClickHandler}>
+			<ValidatorForm
+				ref={formRef}
+				onSubmit={onClickHandler}
+				onError={(errors) => console.log(errors)}
+			>
 				<FormInput
 					label="Destination Name"
 					name="destination name"
