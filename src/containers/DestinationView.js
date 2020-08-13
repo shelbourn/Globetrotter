@@ -47,7 +47,6 @@ const DestinationView = () => {
 	}
 
 	const search = (str) => {
-		console.log('goddammit:', str)
 		console.log(destinations)
 
 		const res = destinations.filter((objs) => {
