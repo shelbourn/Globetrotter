@@ -124,7 +124,7 @@ const DestinationView = () => {
 					Destination List
 				</Typography>
 			</div>
-			<div
+			<span
 				style={{
 					display: 'flex',
 					justifyContent: 'center',
@@ -132,15 +132,18 @@ const DestinationView = () => {
 				}}
 			>
 				<InputBox
-					style={{ width: '300px', marginRight: '16px' }}
+					style={{ width: '40%', marginRight: '16px' }}
 					onChange={(event) => search(event.target.value)}
-					placeholder={'Yo Mama'}
+					placeholder={'Filter Destinations'}
 					value={searchString}
 				/>
-				<Button onClick={() => clearSearch()} style={{ width: '100px' }}>
+				<Button
+					onClick={() => clearSearch()}
+					style={{ width: '20%', fontSize: '1.1rem' }}
+				>
 					Clear
 				</Button>
-			</div>
+			</span>
 			<div style={{ margin: '21px 10px 15px 10px' }}>
 				<TableContainer component={Paper}>
 					<Table className={classes.table} aria-label="destinations table">

@@ -1,10 +1,13 @@
 import React from 'react'
 import TextField from '@material-ui/core/TextField'
+import { TextValidator } from 'react-material-ui-form-validator'
 
-const inputBox = (props) => {
+const formInput = (props) => {
 	return (
-		<TextField
+		<TextValidator
 			style={props.style}
+			validators={props.validators}
+			errorMessages={props.errorMessages}
 			id="outlined-required"
 			label={props.label}
 			name={props.name}
@@ -21,4 +24,4 @@ const inputBox = (props) => {
 	)
 }
 
-export default inputBox
+export default formInput

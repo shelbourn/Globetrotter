@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateDestinations } from '../store/actions/actions'
-import InputBox from '../components/UI/inputBox'
+import { ValidatorForm } from 'react-material-ui-form-validator'
+import FormInput from '../components/UI/formInput'
 import Button from '../components/UI/button'
 import DifficultySelect from '../components/UI/difficultySelect'
 import Typography from '@material-ui/core/Typography'
@@ -22,6 +23,8 @@ const CreateDestination = () => {
 		'storedDestinations',
 		[]
 	)
+
+	const formRef = useRef('form')
 
 	const dispatch = useDispatch()
 
@@ -76,29 +79,38 @@ const CreateDestination = () => {
 					Create Destination
 				</Typography>
 			</div>
-			<form id="create-destination-form">
-				<InputBox
+			<ValidatorForm ref={formRef} onSubmit={onClickHandler}>
+				<FormInput
 					label="Destination Name"
+					name="destination name"
 					placeholder="Enter a Destination"
 					onChange={onChangeHandler('destName')}
 					value={values.destName}
+					validators={['required']}
+					errorMessages={['Destination Name is Required']}
 					style={{ margin: '6px', width: '60%' }}
 				/>
-				<InputBox
+				<FormInput
 					label="Price"
+					name="price"
 					placeholder="Price"
 					onChange={onChangeHandler('destPrice')}
 					value={values.destPrice}
 					adornment={<InputAdornment position="start">$</InputAdornment>}
 					number={true}
+					validators={['required']}
+					errorMessages={['Destination Price is Required']}
 					style={{ margin: '6px', width: '60%' }}
 				/>
-				<InputBox
+				<FormInput
 					label="Description"
 					multiline
+					name="description"
 					placeholder="Enter a Description"
 					onChange={onChangeHandler('destDescription')}
 					value={values.destDescription}
+					validators={['required']}
+					errorMessages={['Destination Description is Required']}
 					style={{ margin: '6px', width: '60%' }}
 				/>
 				<DifficultySelect
@@ -119,7 +131,6 @@ const CreateDestination = () => {
 							fontSize: '1.1rem',
 						}}
 						color="primary"
-						onClick={onClickHandler}
 						type="submit"
 					>
 						Save Destination
@@ -137,7 +148,7 @@ const CreateDestination = () => {
 						Clear Form
 					</Button>
 				</span>
-			</form>
+			</ValidatorForm>
 		</>
 	)
 }

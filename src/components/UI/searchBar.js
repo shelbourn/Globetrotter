@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from '../UI/button'
-import InputBox from '../UI/inputBox'
+import InputBox from './formInput'
 import useLocalStorage from '../../utilities/useLocalStorage'
 import { useSelector } from 'react-redux'
 
@@ -29,7 +29,7 @@ const searchBar = ({ filterFunction, onChange, searchString }) => {
 				<InputBox
 					style={{ width: '300px', marginRight: '16px' }}
 					onChange={() => filterFunction(search(onChange))}
-					placeholder={'Yo Mama'}
+					placeholder={'Filter Destinations'}
 				/>
 				<Button style={{ width: '100px' }}>Clear</Button>
 			</div>
