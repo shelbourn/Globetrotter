@@ -10,5 +10,5 @@
 2. Clone the GlobeTrotter GitHub Repository by executing this command in the CLI: </br> `git clone https://github.com/shelbourn/Globetrotter.git`
 3. Navigate into the directory of the newly cloned GlobeTrotter Repository by executing this command in the CLI: </br> `cd glob` then press the `Tab` key on your keyboard to auto-complete the folder path and the press the `Enter` key
 4. Install/Update all the Node modules and dependencies necessary for this app to run by executing this command in the CLI: </br> `npm install`
-5. After the packages and depencies have been installed/updated run the app using your browser's Local Host by executing this command in the CLI: </br> `npm start`
+5. After the packages and dependencies have been installed/updated run the app using your browser's Local Host by executing this command in the CLI: </br> `npm start`
 6. Your default browser should now open and display the GlobeTrotter app :tada:
