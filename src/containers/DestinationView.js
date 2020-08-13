@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Typography from '@material-ui/core/Typography'
 import { withStyles, makeStyles } from '@material-ui/core/styles'
 import Table from '@material-ui/core/Table'
@@ -29,7 +29,7 @@ const StyledTableCell = withStyles((theme) => ({
 	},
 }))(TableCell)
 
-const initialState = {}
+const initialState = []
 
 const DestinationView = () => {
 	const [destFiltered, setDestFiltered] = useState([])
@@ -38,8 +38,13 @@ const DestinationView = () => {
 
 	const [destinations, setDestinations] = useLocalStorage(
 		'storedDestinations',
-		[initialState]
+		initialState
 	)
+
+	const onClickHandler = () => {
+		setDestinations(initialState)
+		return <OnEmptyTable />
+	}
 
 	const search = (str) => {
 		console.log('goddammit:', str)
@@ -106,7 +111,7 @@ const DestinationView = () => {
 			  })
 	const classes = useStyles()
 
-	if (destinations.length === 1) return <OnEmptyTable />
+	if (destinations.length === 0) return <OnEmptyTable />
 	return (
 		<>
 			<div style={{ margin: '15px 10px 15px 10px', fontWeight: 'bold' }}>
@@ -118,20 +123,39 @@ const DestinationView = () => {
 				style={{
 					display: 'flex',
 					justifyContent: 'center',
+					flexFlow: 'row',
 					width: '100%',
 				}}
 			>
 				<InputBox
-					style={{ width: '40%', marginRight: '16px' }}
+					style={{ minWidth: '160px', width: '40%', marginRight: '16px' }}
 					onChange={(event) => search(event.target.value)}
 					placeholder={'Filter Destinations'}
 					value={searchString}
 				/>
 				<Button
 					onClick={() => clearSearch()}
-					style={{ width: '20%', fontSize: '1.1rem' }}
+					style={{
+						minWidth: '100px',
+						width: '20%',
+						fontSize: '1.1rem',
+						marginRight: '6px',
+					}}
+					color="primary"
 				>
 					Clear
+				</Button>
+				<Button
+					onClick={onClickHandler}
+					style={{
+						minWidth: '100px',
+						width: '20%',
+						fontSize: '1.1rem',
+						marginLeft: '6px',
+						backgroundColor: 'indianRed',
+					}}
+				>
+					Delete
 				</Button>
 			</span>
 			<div style={{ margin: '21px 10px 15px 10px' }}>
