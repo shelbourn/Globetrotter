@@ -1,5 +1,5 @@
 # :globe_with_meridians: Globetrotter :globe_with_meridians:
-*A fun little demo travel app using React, Redux, ... etc*
+*A fun little demo travel app using React, React Hooks, React Router, Material-UI ... etc*
 
 ## Installation Requirements
 1. Must have Git installed on your local machine. More info on how to set that up here: [Install Github](https://git-scm.com/download)
