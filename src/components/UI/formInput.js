@@ -2,23 +2,35 @@ import React from 'react'
 import TextField from '@material-ui/core/TextField'
 import { TextValidator } from 'react-material-ui-form-validator'
 
-const formInput = (props) => {
+const formInput = ({
+	style,
+	validators,
+	errorMessages,
+	label,
+	name,
+	placeholder,
+	multiline,
+	onChange,
+	value,
+	number,
+	adornment,
+}) => {
 	return (
 		<TextValidator
-			style={props.style}
-			validators={props.validators}
-			errorMessages={props.errorMessages}
+			style={style}
+			validators={validators}
+			errorMessages={errorMessages}
 			id="outlined-required"
-			label={props.label}
-			name={props.name}
-			placeholder={props.placeholder}
+			label={label}
+			name={name}
+			placeholder={placeholder}
 			variant="outlined"
-			multiline={props.multiline}
-			onChange={props.onChange}
-			value={props.value}
-			type={props.number ? 'number' : 'text'}
+			multiline={multiline}
+			onChange={onChange}
+			value={value}
+			type={number ? 'number' : 'text'}
 			InputProps={{
-				startAdornment: props.adornment,
+				startAdornment: adornment,
 			}}
 		/>
 	)

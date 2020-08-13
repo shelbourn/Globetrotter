@@ -11,6 +11,7 @@ import Paper from '@material-ui/core/Paper'
 import useLocalStorage from '../utilities/useLocalStorage'
 import InputBox from '../components/UI/inputBox'
 import Button from '../components/UI/button'
+import OnEmptyTable from '../components/UI/onEmptyTable'
 
 const useStyles = makeStyles({
 	table: {
@@ -28,12 +29,7 @@ const StyledTableCell = withStyles((theme) => ({
 	},
 }))(TableCell)
 
-const initialState = {
-	destName: '',
-	destPrice: '',
-	destDescription: '',
-	destDifficulty: '',
-}
+const initialState = {}
 
 const DestinationView = () => {
 	const [destFiltered, setDestFiltered] = useState([])
@@ -117,6 +113,8 @@ const DestinationView = () => {
 					)
 			  })
 	const classes = useStyles()
+
+	if (destinations.length === 1) return <OnEmptyTable />
 	return (
 		<>
 			<div style={{ margin: '15px 10px 15px 10px', fontWeight: 'bold' }}>
