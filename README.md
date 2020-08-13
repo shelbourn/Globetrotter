@@ -1,4 +1,4 @@
-# :globe_with_meridians: Globetrotter :globe_with_meridians:
+# :globe_with_meridians: GlobeTrotter :globe_with_meridians:
 *A fun little demo travel app using React, React Hooks, React Router, Material-UI ... etc*
 
 ## Installation Requirements
