@@ -6,13 +6,9 @@ const button = (props) => {
 		<Button
 			variant="contained"
 			color={props.color}
-			style={{
-				width: '220px',
-				height: '60px',
-				margin: '6px',
-				fontSize: '1.1rem',
-			}}
+			style={props.style}
 			onClick={props.onClick}
+			type={props.type}
 		>
 			{props.children}
 		</Button>

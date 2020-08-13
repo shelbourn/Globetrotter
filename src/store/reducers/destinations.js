@@ -5,7 +5,7 @@ const initialState = localStorage.getItem('storedDestinations')
 const destinations = (state = initialState, action) => {
 	switch (action.type) {
 		case actionsTypes.UPDATE_DESTINATIONS:
-			return localStorage.getItem('storedDestinations')
+			return { ...state }
 
 		default:
 			return state

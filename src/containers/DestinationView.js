@@ -9,7 +9,8 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import useLocalStorage from '../utilities/useLocalStorage'
-import SearchBar from '../components/UI/searchBar'
+import InputBox from '../components/UI/inputBox'
+import Button from '../components/UI/button'
 
 const useStyles = makeStyles({
 	table: {
@@ -27,21 +28,53 @@ const StyledTableCell = withStyles((theme) => ({
 	},
 }))(TableCell)
 
+const initialState = {
+	destName: '',
+	destPrice: '',
+	destDescription: '',
+	destDifficulty: '',
+}
+
 const DestinationView = () => {
 	const [destFiltered, setDestFiltered] = useState([])
 
+	const [searchString, setSearchString] = useState('')
+
 	const [destinations, setDestinations] = useLocalStorage(
 		'storedDestinations',
-		[
-			{
-				destName: '',
-				destPrice: '',
-				destDescription: '',
-				destDifficulty: '',
-				id: '',
-			},
-		]
+		[initialState]
 	)
+
+	const filterFunction = (array) => {
+		setDestFiltered(array)
+	}
+
+	const onChangeHandler = (event) => {
+		setSearchString(event.target.value)
+	}
+
+	const search = (str) => {
+		console.log('goddammit:', str)
+		console.log(destinations)
+
+		const res = destinations.filter((objs) => {
+			if (
+				Object.values(objs).some((v) =>
+					v.toLowerCase().includes(str.toLowerCase())
+				)
+			) {
+				return objs
+			}
+		})
+		console.log(res)
+		setSearchString(str)
+		setDestFiltered(res)
+	}
+
+	const clearSearch = () => {
+		setSearchString('')
+		setDestFiltered([])
+	}
 
 	const tableRowHeaders = [
 		'Destination Name',
@@ -50,23 +83,39 @@ const DestinationView = () => {
 		'Destination Difficulty',
 		'ID',
 	]
-	const tableHeaderMap = tableRowHeaders.map((header) => {
-		return <StyledTableCell key={header.id}>{header}</StyledTableCell>
+	const tableHeaderMap = tableRowHeaders.map((header, i) => {
+		return <StyledTableCell key={header.id + '-' + i}>{header}</StyledTableCell>
 	})
-	const tableRowMap = destinations.map((row, i) => {
-		console.log(row)
-		return (
-			<TableRow key={row.id}>
-				<TableCell component="th" scope="row">
-					{row.destName}
-				</TableCell>
-				<TableCell align="center">{row.destPrice}</TableCell>
-				<TableCell align="center">{row.destDescription}</TableCell>
-				<TableCell align="center">{row.destDifficulty}</TableCell>
-				<TableCell align="center">{row.id}</TableCell>
-			</TableRow>
-		)
-	})
+	console.log(destFiltered)
+	const len = destFiltered.length
+	const tableRowMap =
+		len === 0
+			? destinations.map((row, i) => {
+					return (
+						<TableRow key={row.id + '-' + i}>
+							<TableCell component="th" scope="row">
+								{row.destName}
+							</TableCell>
+							<TableCell align="center">{row.destPrice}</TableCell>
+							<TableCell align="center">{row.destDescription}</TableCell>
+							<TableCell align="center">{row.destDifficulty}</TableCell>
+							<TableCell align="center">{row.id}</TableCell>
+						</TableRow>
+					)
+			  })
+			: destFiltered.map((row, i) => {
+					return (
+						<TableRow key={row.id + '-' + i}>
+							<TableCell component="th" scope="row">
+								{row.destName}
+							</TableCell>
+							<TableCell align="center">{row.destPrice}</TableCell>
+							<TableCell align="center">{row.destDescription}</TableCell>
+							<TableCell align="center">{row.destDifficulty}</TableCell>
+							<TableCell align="center">{row.id}</TableCell>
+						</TableRow>
+					)
+			  })
 	const classes = useStyles()
 	return (
 		<>
@@ -75,11 +124,23 @@ const DestinationView = () => {
 					Destination List
 				</Typography>
 			</div>
-			<SearchBar
-				destintations={destinations}
-				setDestFiltered={setDestFiltered}
-			/>
-
+			<div
+				style={{
+					display: 'flex',
+					justifyContent: 'center',
+					width: '100%',
+				}}
+			>
+				<InputBox
+					style={{ width: '300px', marginRight: '16px' }}
+					onChange={(event) => search(event.target.value)}
+					placeholder={'Yo Mama'}
+					value={searchString}
+				/>
+				<Button onClick={() => clearSearch()} style={{ width: '100px' }}>
+					Clear
+				</Button>
+			</div>
 			<div style={{ margin: '21px 10px 15px 10px' }}>
 				<TableContainer component={Paper}>
 					<Table className={classes.table} aria-label="destinations table">

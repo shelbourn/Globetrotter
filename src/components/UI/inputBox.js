@@ -1,11 +1,12 @@
 import React from 'react'
 import TextField from '@material-ui/core/TextField'
+import { TextValidator } from 'react-material-ui-form-validator'
 
 const inputBox = (props) => {
 	return (
 		<div>
 			<TextField
-				style={{ margin: '6px', width: '60%' }}
+				style={props.style}
 				required
 				id="outlined-required"
 				label={props.label}

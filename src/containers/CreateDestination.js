@@ -55,7 +55,7 @@ const CreateDestination = () => {
 		event.preventDefault()
 		addDestination(values)
 		dispatch(updateDestinations(values))
-		destinations.destPrice = `${destinations.destPrice}`
+		// destinations.destPrice = `${destinations.destPrice}`
 		console.log(destinations)
 	}
 
@@ -82,21 +82,24 @@ const CreateDestination = () => {
 					placeholder="Enter a Destination"
 					onChange={onChangeHandler('destName')}
 					value={values.destName}
+					style={{ margin: '6px', width: '60%' }}
 				/>
 				<InputBox
 					label="Price"
 					placeholder="Price"
 					onChange={onChangeHandler('destPrice')}
-					value={values.destPrice ? values.destPrice : ''}
+					value={values.destPrice}
 					adornment={<InputAdornment position="start">$</InputAdornment>}
 					number={true}
+					style={{ margin: '6px', width: '60%' }}
 				/>
 				<InputBox
 					label="Description"
 					multiline
 					placeholder="Enter a Description"
 					onChange={onChangeHandler('destDescription')}
-					value={values.destDescription ? values.destDescription : ''}
+					value={values.destDescription}
+					style={{ margin: '6px', width: '60%' }}
 				/>
 				<DifficultySelect
 					id="destination-difficulty-input"
@@ -104,13 +107,33 @@ const CreateDestination = () => {
 					inputName="Difficulty"
 					labelId="difficulty-select-label"
 					onChange={onChangeHandler('destDifficulty')}
-					value={values.destDifficulty ? values.destDifficulty : ''}
+					value={values.destDifficulty}
+					style={{ margin: '6px', width: '60%' }}
 				/>
-				<span style={{ width: '60%' }}>
-					<Button color="primary" onClick={onClickHandler}>
+				<span>
+					<Button
+						style={{
+							width: '220px',
+							height: '60px',
+							margin: '6px',
+							fontSize: '1.1rem',
+						}}
+						color="primary"
+						onClick={onClickHandler}
+						type="submit"
+					>
 						Save Destination
 					</Button>
-					<Button color="secondary" onClick={clearFormHandler}>
+					<Button
+						style={{
+							width: '220px',
+							height: '60px',
+							margin: '6px',
+							fontSize: '1.1rem',
+						}}
+						color="secondary"
+						onClick={clearFormHandler}
+					>
 						Clear Form
 					</Button>
 				</span>
