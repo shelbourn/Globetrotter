@@ -26,7 +26,7 @@ const DifficultySelect = ({
 				>
 					<MenuItem value={'Easy'}>Easy</MenuItem>
 					<MenuItem value={'Intermediate'}>Intermediate</MenuItem>
-					<MenuItem value={'Difficult'}>Difficult</MenuItem>
+					<MenuItem value={'Hard'}>Hard</MenuItem>
 				</Select>
 			</FormControl>
 		</div>
