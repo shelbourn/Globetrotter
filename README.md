@@ -2,7 +2,7 @@
 *A fun little demo travel app using React, React Hooks, React Router, Material-UI ... etc*
 
 ## Live Demo
-View live demo here [GlobeTrotter](http://globe-trotter.s3-website.us-east-2.amazonaws.com)
+View live demo here: [GlobeTrotter](http://globe-trotter.s3-website.us-east-2.amazonaws.com)
 
 ## Installation Requirements
 1. Must have Git installed on your local machine. More info on how to set that up here: [Install Github](https://git-scm.com/download)
