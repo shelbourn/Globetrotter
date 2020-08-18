@@ -15,13 +15,17 @@ const CreateDestination = () => {
 		destDifficulty: '',
 		id: '',
 	}
+
+	// setState wrapped hook for input field values
 	const [values, setValues] = useLocalStorage('storedValues', initialValues)
 
+	// setState wrapped hook for destination entries
 	const [destinations, setDestinations] = useLocalStorage(
 		'storedDestinations',
 		[]
 	)
 
+	// Enables use of 'ref' for form validation
 	const formRef = useRef('form')
 
 	const onChangeHandler = (event) => {
