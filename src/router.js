@@ -16,7 +16,9 @@ const mainRouter = () => {
 				<Switch>
 					<Route path="/create" component={CreateDestination} />
 					<Route path="/destinations" component={DestinationView} />
-					<Route exact path="/" component={CreateDestination}></Route>
+					<Route exact path="/">
+						<Redirect to="/create" />
+					</Route>
 				</Switch>
 			</Router>
 		</>
