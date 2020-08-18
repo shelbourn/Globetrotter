@@ -53,6 +53,7 @@ const DestinationView = () => {
 		//! let is block scoped, whereas const is hoisted and gets global scoped
 		//! because of this, consts take up memory regardless of whether they are being used
 		//! lets release their memory as soon as the block of code completes
+		//? I actually don't think of the above is true
 		let res = destinations.filter((objs) => {
 			if (
 				Object.values(objs).some((v) =>
