@@ -6,6 +6,8 @@ import DifficultySelect from '../components/UI/difficultySelect'
 import Typography from '@material-ui/core/Typography'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import useLocalStorage from '../utilities/useLocalStorage'
+import Modal from '../components/HOC/modal'
+import OnEmptyTable from '../components/UI/onEmptyTable'
 
 const CreateDestination = () => {
 	const initialValues = {
@@ -24,6 +26,17 @@ const CreateDestination = () => {
 		'storedDestinations',
 		[]
 	)
+
+	// state to handle Modal component
+	const [isOpen, setIsOpen] = useState(false)
+
+	const handleModalOpen = () => {
+		setIsOpen(true)
+	}
+
+	const handleModalClose = () => {
+		setIsOpen(false)
+	}
 
 	// Enables use of 'ref' for form validation
 	const formRef = useRef('form')
@@ -80,7 +93,7 @@ const CreateDestination = () => {
 			</div>
 			<ValidatorForm
 				ref={formRef}
-				onSubmit={onClickHandler}
+				onSubmit={(onClickHandler, handleModalOpen)}
 				onError={(errors) => console.log(errors)}
 			>
 				<FormInput
@@ -127,6 +140,11 @@ const CreateDestination = () => {
 					style={{ margin: '6px', width: '60%' }}
 				/>
 				<span>
+					{/* Modal Test */}
+					<Modal title="Test" handleClose={handleModalClose} isOpen={isOpen}>
+						<OnEmptyTable />
+					</Modal>
+					{/* ...End Modal Test */}
 					<Button
 						style={{
 							width: '220px',
