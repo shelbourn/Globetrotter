@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { ValidatorForm } from 'react-material-ui-form-validator'
 import FormInput from '../components/UI/formInput'
 import Button from '../components/UI/button'
@@ -24,8 +24,8 @@ const CreateDestination = () => {
 
 	const formRef = useRef('form')
 
-	const onChangeHandler = (prop) => (event) => {
-		setValues({ ...values, [prop]: event.target.value })
+	const onChangeHandler = (event) => {
+		setValues({ ...values, [event.target.name]: event.target.value })
 	}
 
 	const addDestination = (destination) => {
@@ -37,6 +37,8 @@ const CreateDestination = () => {
 				values.destDescription === ''
 			)
 				throw new Error('Whoopsie! Empty destination fields present. =(')
+			//! Replace following block using prevState
+			//! Check into passing args through wrapped hooks
 			else {
 				const newDestinations = [
 					...destinations,
@@ -80,9 +82,9 @@ const CreateDestination = () => {
 			>
 				<FormInput
 					label="Destination Name"
-					name="destination name"
+					name="destName"
 					placeholder="Enter a Destination"
-					onChange={onChangeHandler('destName')}
+					onChange={onChangeHandler}
 					value={values.destName}
 					validators={['required']}
 					errorMessages={['Destination Name is Required']}
@@ -90,9 +92,9 @@ const CreateDestination = () => {
 				/>
 				<FormInput
 					label="Price"
-					name="price"
+					name="destPrice"
 					placeholder="Price"
-					onChange={onChangeHandler('destPrice')}
+					onChange={onChangeHandler}
 					value={values.destPrice}
 					adornment={<InputAdornment position="start">$</InputAdornment>}
 					number={true}
@@ -103,9 +105,9 @@ const CreateDestination = () => {
 				<FormInput
 					label="Description"
 					multiline
-					name="description"
+					name="destDescription"
 					placeholder="Enter a Description"
-					onChange={onChangeHandler('destDescription')}
+					onChange={onChangeHandler}
 					value={values.destDescription}
 					validators={['required']}
 					errorMessages={['Destination Description is Required']}
@@ -114,9 +116,10 @@ const CreateDestination = () => {
 				<DifficultySelect
 					id="destination-difficulty-input"
 					label="difficulty"
-					inputName="Difficulty"
+					fieldName="destDifficulty"
+					displayName="Difficulty"
 					labelId="difficulty-select-label"
-					onChange={onChangeHandler('destDifficulty')}
+					onChange={onChangeHandler}
 					value={values.destDifficulty}
 					style={{ margin: '6px', width: '60%' }}
 				/>

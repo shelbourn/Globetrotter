@@ -49,7 +49,11 @@ const DestinationView = () => {
 	const search = (str) => {
 		console.log(destinations)
 
-		const res = destinations.filter((objs) => {
+		//! Consider let for this and all other block scoped consts
+		//! let is block scoped, whereas const is hoisted and gets global scoped
+		//! because of this, consts take up memory regardless of whether they are being used
+		//! lets release their memory as soon as the block of code completes
+		let res = destinations.filter((objs) => {
 			if (
 				Object.values(objs).some((v) =>
 					v.toLowerCase().includes(str.toLowerCase())
@@ -75,9 +79,11 @@ const DestinationView = () => {
 		'Destination Difficulty',
 		'ID',
 	]
+
 	const tableHeaderMap = tableRowHeaders.map((header, i) => {
 		return <StyledTableCell key={header.id + '-' + i}>{header}</StyledTableCell>
 	})
+
 	console.log(destFiltered)
 	const len = destFiltered.length
 	const tableRowMap =

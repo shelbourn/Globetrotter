@@ -7,7 +7,8 @@ import Select from '@material-ui/core/Select'
 const DifficultySelect = ({
 	style,
 	labelId,
-	inputName,
+	fieldName,
+	displayName,
 	id,
 	value,
 	onChange,
@@ -16,10 +17,11 @@ const DifficultySelect = ({
 	return (
 		<div>
 			<FormControl variant="outlined" style={style} required>
-				<InputLabel id={labelId}>{inputName}</InputLabel>
+				<InputLabel id={labelId}>{displayName}</InputLabel>
 				<Select
 					labelId={labelId}
 					id={id}
+					name={fieldName}
 					value={value}
 					onChange={onChange}
 					label={label}
