@@ -37,14 +37,13 @@ const CreateDestination = () => {
 				values.destDescription === ''
 			)
 				throw new Error('Whoopsie! Empty destination fields present. =(')
-			//! Replace following block using prevState
-			//! Check into passing args through wrapped hooks
 			else {
-				const newDestinations = [
-					...destinations,
+				// prevDestinations is equivalent to prevState
+				// This is accessing the previous state value for destinations
+				setDestinations((prevDestinations) => [
+					...prevDestinations,
 					{ ...destination, id: destination.destName },
-				]
-				setDestinations(newDestinations)
+				])
 			}
 		} catch (err) {
 			console.log(`${err.name}: ${err.message}`)
